@@ -1,0 +1,1538 @@
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>MemoryVault AI</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        padding: 20px;
+        font-family: Arial, sans-serif;
+        background: #f4f6f8;
+        color: #222;
+    }
+
+    .container {
+        width: 100%;
+        max-width: 850px;
+        margin: 30px auto;
+        background: white;
+        padding: 30px;
+        border-radius: 16px;
+        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.10);
+    }
+
+    h1 {
+    text-align: center;
+    margin-bottom: 8px;
+    font-size: 32px;
+    color: #1e293b;
+}
+
+#userEmail {
+    text-align: center;
+    color: #64748b;
+    font-size: 15px;
+    margin-bottom: 20px;
+}
+
+    .status {
+        text-align: center;
+        padding: 12px;
+        margin-bottom: 25px;
+        border-radius: 8px;
+        background: #ecfdf5;
+        color: #15803d;
+        font-weight: bold;
+    }
+
+    .section {
+        margin-top: 30px;
+        text-align: center;
+    }
+
+    h2 {
+        margin-bottom: 15px;
+    }
+
+    input,
+    textarea {
+        display: block;
+        width: 100%;
+        padding: 12px;
+        margin: 8px auto 15px auto;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 15px;
+        font-family: Arial, sans-serif;
+    }
+
+    textarea {
+        min-height: 110px;
+        resize: vertical;
+    }
+
+    button {
+        padding: 12px 18px;
+        border: none;
+        border-radius: 8px;
+        background: #2563eb;
+        color: white;
+        font-size: 15px;
+        cursor: pointer;
+        margin: 5px;
+    }
+
+    button:hover {
+        opacity: 0.88;
+    }
+
+    .secondary {
+        background: #64748b;
+    }
+
+    .danger {
+        background: #dc2626;
+    }
+
+    .search {
+        background: #16a34a;
+    }
+
+    .ai {
+        background: #7c3aed;
+    }
+
+    .message {
+        padding: 14px;
+        margin: 12px 0;
+        border-radius: 8px;
+        background: #f1f5f9;
+        text-align: center;
+    }
+
+
+    .memory h3 {
+        margin-top: 0;
+        margin-bottom: 10px;
+    }
+
+    .memory p {
+        margin: 8px 0;
+        line-height: 1.5;
+    }
+
+    .date {
+        color: #64748b;
+        font-size: 13px;
+    }
+
+    .favorite {
+        font-size: 14px;
+    }
+
+    #result {
+        margin-top: 15px;
+        padding: 15px;
+        border-radius: 8px;
+        background: #f5f3ff;
+        white-space: pre-wrap;
+        line-height: 1.6;
+        text-align: left;
+    }
+
+    .message.success {
+        background: #dcfce7;
+        color: #166534;
+    }
+
+    .message.error {
+        background: #fee2e2;
+        color: #991b1b;
+    }
+
+    @media (max-width: 600px) {
+
+        body {
+            padding: 10px;
+        }
+
+        .container {
+            margin: 10px auto;
+            padding: 20px;
+        }
+
+        button {
+            width: 100%;
+            margin: 5px 0;
+        }
+    }
+    #authSection {
+    text-align: center;
+}
+
+#authSection input {
+    display: block;
+    width: 90%;
+    margin: 10px auto;
+}
+#authSection .password-box {
+    width: 90%;
+    margin: 10px auto;
+}
+
+#authSection .password-box input {
+    width: 100%;
+    margin: 0;
+}
+
+#authSection button {
+    margin: 5px;
+}
+/* ==============================
+   MEMORYVAULT UI IMPROVEMENT
+   ============================== */
+
+body {
+    background: linear-gradient(135deg, #eef2ff, #f8fafc);
+}
+
+.container {
+    max-width: 900px;
+    border: 1px solid #e2e8f0;
+}
+
+h1 {
+    font-size: 32px;
+    color: #1e293b;
+}
+
+.section {
+    background: #ffffff;
+    padding: 22px;
+    border-radius: 14px;
+    margin-top: 25px;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.06);
+}
+
+.section h2 {
+    color: #334155;
+}
+
+input,
+textarea {
+    border: 1px solid #cbd5e1;
+    transition: 0.2s;
+}
+
+input:focus,
+textarea:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+button {
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+
+button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+}
+
+.memory {
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.memory:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+/* Account UI */
+
+#authSection {
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.password-box {
+    position: relative;
+    width: 90%;
+    margin: 10px auto;
+}
+
+.password-box input {
+    width: 100%;
+    margin: 0;
+    padding-right: 55px;
+}
+
+.password-box button {
+    position: absolute;
+    right: 5px;
+    top: 4px;
+    padding: 8px 12px;
+    margin: 0;
+    background: #64748b;
+}
+#authSection > button {
+    min-width: 120px;
+}
+
+#authSection > button:first-of-type {
+    background: #2563eb;
+}
+
+#authSection > button:nth-of-type(2) {
+    background: #16a34a;
+}
+
+#authSection > button:nth-of-type(3) {
+    background: #dc2626;
+}
+
+#authSection > button:nth-of-type(4) {
+    background: #64748b;
+}
+/* ==============================
+   LEFT SIDE MENU
+   ============================== */
+
+#menuButton {
+    position: fixed;
+    top: 18px;
+    left: 18px;
+    z-index: 1001;
+    font-size: 22px;
+    padding: 10px 14px;
+    margin: 0;
+    border-radius: 10px;
+}
+
+#sideMenu {
+    position: fixed;
+    top: 0;
+    left: -280px;
+    width: 280px;
+    height: 100vh;
+    background: #ffffff;
+    box-shadow: 5px 0 20px rgba(0, 0, 0, 0.15);
+    padding: 25px 18px;
+    z-index: 1000;
+    overflow-y: auto;
+    transition: left 0.3s ease;
+}
+
+#sideMenu.open {
+    left: 0;
+}
+
+#sideMenu button {
+    display: block;
+    width: 100%;
+    margin: 7px 0;
+    text-align: left;
+}
+
+.menuTitle {
+    font-size: 21px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #1e293b;
+}
+
+.menuItem {
+    margin-top: 22px;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #475569;
+    font-size: 16px;
+}
+.menuClose {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+
+    width: 38px !important;
+    height: 38px;
+
+    padding: 0 !important;
+    margin: 0 !important;
+
+    background: white !important;
+    color: red !important;
+
+    border: 1px solid #cbd5e1 !important;
+    border-radius: 6px;
+
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#authSection {
+    display: none;
+}
+</style>
+
+</head><body>
+    <!-- LEFT MENU -->
+
+<button id="menuButton" onclick="toggleMenu()">☰</button>
+
+<div id="sideMenu">
+
+    <div class="menuTitle">
+        🧠 MemoryVault AI
+    </div>
+    <button class="menuClose" onclick="closeMenu()">❌</button>
+
+    <div class="menuItem">
+        🔐 Account
+    </div>
+
+    <button onclick="openLogin()">
+    🔑 Login
+</button>
+    <button onclick="openRegister()">
+    📝 Register
+</button>
+    <button onclick="logoutUser()">
+    🚪 Logout
+</button>
+    <button onclick="checkLogin()">
+    ✅ Check Login
+</button>
+
+
+</div>
+    <div class="section" id="authSection">
+
+    <h2>🔐 Account</h2>
+
+    <input
+        type="email"
+        id="loginEmail"
+        placeholder="Email"
+    >
+    <div class="password-box">
+    <input
+        type="password"
+        id="loginPassword"
+        placeholder="Password"
+    >
+    <button type="button"onclick="togglePassword()">👁️</button></div>
+
+    <button onclick="loginUser()">
+        🔐 Login
+    </button>
+
+    <button onclick="registerUser()">
+        📝 Register
+    </button>
+
+    <button onclick="logoutUser()">
+        🚪 Logout
+    </button>
+
+    <button onclick="checkLogin()">
+        🔑 Check Login
+    </button>
+
+    <div id="authMessage"></div>
+
+</div>
+    <div class="container"><h1>🧠 MemoryVault AI</h1>
+        <div id="userEmail"></div>
+    
+
+    <div id="loginStatus"></div>
+</div>
+
+<div id="status" class="status">
+    ⏳ Checking Backend...
+</div>
+
+
+<!-- ADD MEMORY -->
+
+<div class="section">
+
+    <h2>➕ Add Memory</h2>
+
+    <input
+        type="text"
+        id="title"
+        placeholder="Memory title"
+    >
+
+    <textarea
+        id="content"
+        placeholder="Write your memory..."
+    ></textarea>
+
+    <button onclick="addMemory()">
+        💾 Save Memory
+    </button>
+
+    <div id="saveMessage"></div>
+
+</div>
+
+
+<!-- SEARCH -->
+
+<div class="section">
+
+    <h2>🔎 Search Memories</h2>
+
+    <input
+        type="text"
+        id="searchKeyword"
+        placeholder="Search by title or content..."
+    >
+
+    <button class="search" onclick="searchMemories()">
+        🔎 Search
+    </button>
+
+    <button class="secondary" onclick="getMemories()">
+        🔄 Load All Memories
+    </button>
+
+    <div id="searchResults"></div>
+
+</div>
+
+
+<!-- MEMORIES -->
+
+<div class="section">
+
+    <h2>📚 My Memories</h2>
+
+    <div id="memories">
+
+        <div class="message">
+            Loading memories...
+        </div>
+
+    </div>
+
+</div>
+<div class="section">
+    <h2>⭐ My Favorites</h2>
+
+    <button onclick="getFavorites()">
+        ⭐ Load Favorites
+    </button>
+
+    <div id="favorites"></div>
+</div>
+<div class="section">
+    <h2>📊 Dashboard</h2>
+
+    <button onclick="getDashboard()">
+        📊 Load Dashboard
+    </button>
+
+    <div id="dashboard"></div>
+</div>
+
+
+<!-- ASK AI -->
+
+<div class="section">
+
+    <h2>🤖 Ask AI</h2>
+
+    <textarea
+        id="question"
+        placeholder="Ask something about your memories..."
+    ></textarea>
+
+    <button class="ai" onclick="askAI()">
+        🤖 Ask AI
+    </button>
+
+    <div id="result"></div>
+
+</div>
+
+</div><script>
+
+    // ==========================================
+    // BACKEND URL + TOKEN
+    // ==========================================
+
+    const API_URL = "http://127.0.0.1:8001";
+    let TOKEN = localStorage.getItem("token");
+    function showUserEmail() {
+
+    const userEmail = document.getElementById("userEmail");
+    const email = localStorage.getItem("email");
+
+    if (email) {
+        userEmail.innerHTML =
+            "👤 " + escapeHTML(email);
+    } else {
+        userEmail.innerHTML =
+            "👤 Not logged in";
+    }
+}
+    function checkLogin() {
+
+    const loginStatus =
+        document.getElementById("loginStatus");
+
+    const token =
+        localStorage.getItem("token");
+
+    if (token) {
+
+        loginStatus.innerHTML =
+            '<div class="message success">✅ You are logged in.</div>';
+
+    } else {
+
+        loginStatus.innerHTML =
+            '<div class="message error">❌ You are not logged in.</div>';
+    }
+
+    closeMenu();
+}
+
+
+function logout() {
+
+    localStorage.removeItem("token");
+    localStorage.removeItem("email");
+    localStorage.removeItem("user_id");
+
+    alert("✅ Logged out successfully!");
+
+    window.location.reload();
+}
+
+
+    // ==========================================
+    // CHECK TOKEN
+    // ==========================================
+
+    function checkToken() {
+
+        if (!TOKEN) {
+
+            console.error("Token not found in localStorage");
+
+            return false;
+        }
+
+        return true;
+    }
+
+
+    // ==========================================
+    // CHECK BACKEND
+    // ==========================================
+
+    async function checkBackend() {
+
+        const status =
+            document.getElementById("status");
+
+        try {
+
+            const response =
+                await fetch(API_URL + "/");
+
+            const data =
+                await response.json();
+
+            if (response.ok) {
+
+                if (data.gemini_api_loaded) {
+
+                    status.innerHTML =
+                        "🟢 Backend Connected 🚀 | Gemini Connected 🤖";
+
+                } else {
+
+                    status.innerHTML =
+                        "🟢 Backend Connected 🚀 | Gemini Not Connected ⚠️";
+                }
+
+            } else {
+
+                status.innerHTML =
+                    "🔴 Backend Error ❌";
+            }
+
+        } catch (error) {
+
+            status.innerHTML =
+                "🔴 Backend Connection Failed ❌";
+
+            console.error(error);
+        }
+    }
+
+
+    // ==========================================
+// ADD MEMORY
+// ==========================================
+ 
+async function addMemory() {
+
+    if (!TOKEN) {
+        document.getElementById("saveMessage").innerHTML =
+            '<div class="message error">❌ Please login first to save a memory.</div>';
+        return;
+    }
+
+    const title = document.getElementById("title").value.trim();
+    const content = document.getElementById("content").value.trim();
+    const message = document.getElementById("saveMessage");
+
+    if (title.length < 3) {
+        message.innerHTML =
+            '<div class="message error">❌ Title must contain at least 3 characters.</div>';
+        return;
+    }
+
+    if (content.length < 5) {
+        message.innerHTML =
+            '<div class="message error">❌ Memory must contain at least 5 characters.</div>';
+        return;
+    }
+
+    try {
+        const response = await fetch(API_URL + "/memory", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + TOKEN
+    },
+    body: JSON.stringify({
+        user_id: parseInt(localStorage.getItem("user_id")),
+        title: title,
+        content: content,
+        favorite: 0
+    })
+});
+
+        const data = await response.json();
+
+        if (data.status === "success") {
+
+            message.innerHTML =
+                '<div class="message success">✅ Memory saved successfully!</div>';
+
+            document.getElementById("title").value = "";
+            document.getElementById("content").value = "";
+
+            getMemories();
+
+        } else {
+
+            message.innerHTML =
+                '<div class="message error">❌ ' +
+                (data.message || "Memory save failed") +
+                '</div>';
+        }
+
+    } catch (error) {
+
+        message.innerHTML =
+            '<div class="message error">❌ Backend connection failed.</div>';
+
+        console.error(error);
+    }
+}
+
+   
+
+    // ==========================================
+    // DELETE MEMORY
+    // ==========================================
+
+    async function deleteMemory(id) {
+
+        const confirmDelete =
+            confirm(
+                "Are you sure you want to delete this memory?"
+            );
+
+
+        if (!confirmDelete) {
+
+            return;
+        }
+
+
+        if (!checkToken()) {
+
+            alert("❌ Login token not found.");
+
+            return;
+        }
+
+
+        try {
+
+            const response =
+                await fetch(
+                    API_URL +
+                    "/memory/" +
+                    id +
+                    "?token=" +
+                    encodeURIComponent(TOKEN),
+                    {
+
+                        method: "DELETE"
+
+                    }
+                );
+
+
+            const data =
+                await response.json();
+
+
+            if (data.status === "success") {
+
+                alert(
+                    "✅ Memory deleted successfully!"
+                );
+
+                getMemories();
+
+            } else {
+
+                alert(
+                    "❌ " +
+                    (data.message || "Delete failed")
+                );
+            }
+
+
+        } catch (error) {
+
+            alert(
+                "❌ Backend connection failed."
+            );
+
+            console.error(error);
+        }
+    }
+
+
+    // ==========================================
+    // SEARCH MEMORIES
+    // ==========================================
+
+    async function searchMemories() {
+
+        const keyword =
+            document
+                .getElementById("searchKeyword")
+                .value
+                .trim();
+
+        const results =
+            document.getElementById("searchResults");
+
+
+        if (!keyword) {
+
+            results.innerHTML =
+                '<div class="message error">❌ Enter a search keyword.</div>';
+
+            return;
+        }
+
+
+        if (!checkToken()) {
+
+            results.innerHTML =
+                '<div class="message error">❌ Login token not found.</div>';
+
+            return;
+        }
+
+
+        results.innerHTML =
+            '<div class="message">⏳ Searching...</div>';
+
+
+        try {
+
+            const response =
+                await fetch(
+                    API_URL +
+                    "/search?keyword=" +
+                    encodeURIComponent(keyword) +
+                    "&token=" + encodeURIComponent(TOKEN)
+                );
+
+
+            const data =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    data.message || "Search failed"
+                );
+            }
+
+
+            if (
+                !data.memories ||
+                data.memories.length === 0
+            ) {
+
+                results.innerHTML =
+                    '<div class="message">📭 No matching memories found.</div>';
+
+                return;
+            }
+
+
+            results.innerHTML = "";
+
+
+            data.memories.forEach(function(memory) {
+
+                const title = memory[2];
+
+                const content = memory[3];
+
+                const createdAt = memory[4];
+
+
+                results.innerHTML += `
+
+                    <div class="memory">
+
+                        <h3>
+                            🧠 ${escapeHTML(title)}
+                        </h3>
+
+                        <p>
+                            ${escapeHTML(content)}
+                        </p>
+
+                        <p class="date">
+                            📅 ${escapeHTML(createdAt)}
+                        </p>
+
+                    </div>
+
+                `;
+
+            });
+
+
+        } catch (error) {
+
+            results.innerHTML =
+                '<div class="message error">❌ Search failed.</div>';
+
+            console.error(error);
+        }
+    }
+
+
+    // ==========================================
+    // ASK AI
+    // ==========================================
+
+    async function askAI() {
+
+        const question =
+            document
+                .getElementById("question")
+                .value
+                .trim();
+
+        const result =
+            document.getElementById("result");
+
+
+        if (question.length < 2) {
+
+            result.innerHTML =
+                "❌ Please enter a question.";
+
+            return;
+        }
+
+
+        if (!checkToken()) {
+
+            result.innerHTML =
+                "❌ Login token not found.";
+
+            return;
+        }
+
+
+        result.innerHTML =
+            "🤖 AI is thinking...";
+
+
+        try {
+
+            const response =
+                await fetch(
+                    API_URL +
+                    "/ask-ai?token=" +
+                    encodeURIComponent(TOKEN),
+                    {
+
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+
+                        body: JSON.stringify({
+
+                            question: question
+
+                        })
+
+                    }
+                );
+
+
+            const data =
+                await response.json();
+            console.log("ASK AI DATA:",data);
+
+
+            if (data.status !== "success") {
+
+                result.innerHTML =
+                    "❌ " +
+                    (data.message ||
+                     "AI request failed.");
+
+                return;
+            }
+
+
+            result.innerHTML = `
+
+                <strong>🤖 AI Answer:</strong>
+
+                <br><br>
+
+                ${escapeHTML(data.answer)}
+
+            `;
+
+
+        } catch (error) {
+
+            result.innerHTML =
+                "❌ Backend connection failed.";
+
+            console.error(error);
+        }
+    }
+
+
+    // ==========================================
+    // SECURITY HELPER
+    // ==========================================
+
+    function escapeHTML(value) {
+
+        return String(value)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    }
+    async function getMemories() {
+
+    const memoriesDiv = document.getElementById("memories");
+
+    memoriesDiv.innerHTML =
+        '<div class="message">⏳ Loading memories...</div>';
+
+    try {
+
+        const response = await fetch(
+            API_URL + "/memories?token=" + encodeURIComponent(TOKEN));
+
+        const data = await response.json();
+
+        console.log("MEMORIES DATA:", data);
+
+        if (!response.ok) {
+            throw new Error(data.message || "Failed to load memories");
+        }
+
+        if (!data.memories || data.memories.length === 0) {
+            memoriesDiv.innerHTML =
+                '<div class="message">📭 No memories saved yet.</div>';
+            return;
+        }
+
+        memoriesDiv.innerHTML = "";
+
+        data.memories.forEach(function(memory) {
+
+            const id = memory[0];
+            const title = memory[2];
+            const content = memory[3];
+            const createdAt = memory[4];
+            const favorite = memory[5];
+
+            memoriesDiv.innerHTML += `
+                <div class="memory">
+                    <h3>🧠 ${escapeHTML(title)}</h3>
+                    <p>${escapeHTML(content)}</p>
+                    <p class="date">📅 ${escapeHTML(createdAt)}</p>
+                    <p class="favorite">
+                        ⭐ Favorite: ${favorite == 1 ? "Yes" : "No"}
+                    </p>
+                    <button onclick="editMemory(${id})">
+    ✏️ Edit
+</button>
+
+<button onclick="toggleFavorite(${id}, ${favorite})">
+    ⭐ ${favorite == 1 ? "Unfavorite" : "Favorite"}
+</button>
+
+<button class="danger" onclick="deleteMemory(${id})">
+    🗑️ Delete
+</button>
+                </div>
+            `;
+        });
+
+    } catch (error) {
+
+        memoriesDiv.innerHTML =
+            '<div class="message error">❌ Could not load memories.</div>';
+
+        console.error("GET MEMORIES ERROR:", error);
+    }
+}
+async function toggleFavorite(id, currentFavorite) {
+
+    const newFavorite = currentFavorite == 1 ? 0 : 1;
+
+    try {
+
+        // Get existing memories
+        const memoriesResponse = await fetch(
+            API_URL + "/memories?token=" +
+            encodeURIComponent(TOKEN)
+        );
+
+        const memoriesData = await memoriesResponse.json();
+
+        if (!memoriesResponse.ok) {
+            throw new Error("Could not load memory");
+        }
+
+        // Find the selected memory
+        const selectedMemory = memoriesData.memories.find(
+            memory => memory[0] == id
+        );
+
+        if (!selectedMemory) {
+            alert("❌ Memory not found");
+            return;
+        }
+
+        const response = await fetch(
+            API_URL + "/memory/" + id + "?token=" + encodeURIComponent(TOKEN),
+            {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    user_id: parseInt(localStorage.getItem("user_id")),
+                    title: selectedMemory[2],
+                    content: selectedMemory[3],
+                    favorite: newFavorite
+                })
+            }
+        );
+
+        const data = await response.json();
+
+        if (data.status === "success") {
+
+            getMemories();
+            getFavorites();
+
+        } else {
+
+            alert(
+                "❌ " +
+                (data.message || "Favorite update failed")
+            );
+        }
+
+    } catch (error) {
+
+        alert("❌ Favorite update failed");
+        console.error(error);
+    }
+}
+async function getFavorites() {
+
+    const favoritesDiv = document.getElementById("favorites");
+
+    favoritesDiv.innerHTML =
+        '<div class="message">⏳ Loading favorites...</div>';
+
+    try {
+
+        const response = await fetch(
+            API_URL + "/favorites?token=" +
+            encodeURIComponent(TOKEN)
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error("Failed to load favorites");
+        }
+
+        if (!data.favorites || data.favorites.length === 0) {
+            favoritesDiv.innerHTML =
+                '<div class="message">📭 No favorite memories.</div>';
+            return;
+        }
+
+        favoritesDiv.innerHTML = "";
+
+        data.favorites.forEach(function(memory) {
+
+            const title = memory[2];
+            const content = memory[3];
+            const createdAt = memory[4];
+
+            favoritesDiv.innerHTML += `
+                <div class="memory">
+                    <h3>⭐ ${escapeHTML(title)}</h3>
+                    <p>${escapeHTML(content)}</p>
+                    <p class="date">📅 ${escapeHTML(createdAt)}</p>
+                </div>
+            `;
+        });
+
+    } catch (error) {
+
+        favoritesDiv.innerHTML =
+            '<div class="message error">❌ Could not load favorites.</div>';
+
+        console.error(error);
+    }
+}
+
+async function editMemory(id) {
+
+    const newTitle = prompt("Enter new title:");
+    if (newTitle === null) return;
+
+    const newContent = prompt("Enter new content:");
+    if (newContent === null) return;
+
+    try {
+
+        const response = await fetch(
+            API_URL + "/memory/" + id + "?token="+ encodeURIComponent(TOKEN),
+            {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    user_id:parseInt(localStorage.getItem("user_id")),
+                    title: newTitle,
+                    content: newContent,
+                    favorite: 0
+                })
+            }
+        );
+
+        const data = await response.json();
+
+        if (data.status === "success") {
+            alert("✅ Memory updated successfully!");
+            getMemories();
+        } else {
+            alert("❌ " + (data.message || "Update failed"));
+        }
+
+    } catch (error) {
+        alert("❌ Memory update failed.");
+        console.error(error);
+    }
+}
+
+async function getDashboard() {
+
+    const dashboard = document.getElementById("dashboard");
+
+    dashboard.innerHTML =
+        '<div class="message">⏳ Loading dashboard...</div>';
+
+    try {
+
+        const response = await fetch(
+            API_URL + "/dashboard?token=" +
+            encodeURIComponent(TOKEN)
+        );
+
+        const data = await response.json();
+
+        if (!response.ok || data.status === "failed") {
+            throw new Error(data.message || "Dashboard failed");
+        }
+
+        dashboard.innerHTML = `
+            <div class="memory">
+                <h3>📊 Dashboard</h3>
+                <p>🧠 Total Memories: ${data.dashboard.total_memories}</p>
+                <p>⭐ Favorite Memories: ${data.dashboard.favorite_memories}</p>
+            </div>
+        `;
+
+    } catch (error) {
+
+        dashboard.innerHTML =
+            '<div class="message error">❌ Could not load dashboard.</div>';
+
+        console.error("DASHBOARD ERROR:", error);
+    }
+}
+// ==========================================
+// LOGIN
+// ==========================================
+
+async function loginUser() {
+
+    const email = document.getElementById("loginEmail").value.trim();
+    console.log("LOGIN EMAIL:",email);
+    const password = document.getElementById("loginPassword").value;
+    const message = document.getElementById("authMessage");
+
+    if (!email || !password) {
+        message.innerHTML = "❌ Enter email and password.";
+        return;
+    }
+
+    try {
+
+        const response = await fetch(API_URL + "/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                email: email,
+                password: password
+            })
+        });
+
+        const data = await response.json();
+
+        if (data.status === "success") {
+
+            localStorage.setItem("token", data.access_token);
+            TOKEN=data.access_token;
+            localStorage.setItem("email", data.email);
+            localStorage.setItem("user_id",data.user_id);
+
+            message.innerHTML =
+                "✅ Login successful!";
+
+            location.reload();
+
+        } else {
+
+            message.innerHTML =
+                "❌ " + (data.message || "Login failed");
+        }
+
+    } catch (error) {
+
+        message.innerHTML =
+            "❌ Backend connection failed.";
+
+        console.error(error);
+    }
+}
+
+
+// ==========================================
+// LOGOUT
+// ==========================================
+
+function logoutUser() {
+
+    localStorage.removeItem("token");
+    localStorage.removeItem("user_id");
+
+    alert("✅ Logged out successfully!");
+
+    location.reload();
+}
+
+
+// ==========================================
+// CHECK LOGIN
+// ==========================================
+
+function checkLogin() {
+
+    const token = localStorage.getItem("token");
+    const message = document.getElementById("authMessage");
+
+    if (token) {
+
+        message.innerHTML =
+            "✅ You are logged in.";
+
+    } else {
+
+        message.innerHTML =
+            "❌ You are not logged in.";
+    }
+}
+
+
+// ==========================================
+// REGISTER
+// ==========================================
+
+async function registerUser() {
+
+    const email = document.getElementById("loginEmail").value.trim();
+    console.log("LOGIN EMAIL:",email);
+    const password = document.getElementById("loginPassword").value;
+    const message = document.getElementById("authMessage");
+    if(!email || !password){
+        message.innerHTML="❌ Enter email and password.";
+        return;
+    }
+    const name = prompt("Enter your name:");
+
+    if (!name) {
+        return;
+    }
+
+    if (!email || !password) {
+        message.innerHTML =
+            "❌ Enter email and password.";
+        return;
+    }
+
+    try {
+
+        const response = await fetch(API_URL + "/register", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                name: name,
+                email: email,
+                password: password
+            })
+        });
+
+        const data = await response.json();
+
+        if (data.status === "success") {
+
+            message.innerHTML =
+                "✅ Registration successful! Now click Login.";
+
+        } else {
+
+            message.innerHTML =
+                "❌ " + (data.message || "Registration failed");
+        }
+
+    } catch (error) {
+
+        message.innerHTML =
+            "❌ Backend connection failed.";
+
+        console.error(error);
+    }
+}
+
+
+    // ==========================================
+    // START APPLICATION
+    // ==========================================
+
+    checkBackend();
+    getMemories();
+    showUserEmail();
+    function togglePassword() {
+    const password = document.getElementById("loginPassword");
+    
+    if (password.type === "password") {
+        password.type = "text";
+    } else {
+        password.type = "password";
+    }
+}
+function toggleMenu() {
+    document.getElementById("sideMenu").classList.toggle("open");
+}
+
+function closeMenu() {
+    document.getElementById("sideMenu").classList.remove("open");
+}function openLogin() {
+    const auth = document.getElementById("authSection");
+
+    auth.style.display = "block";
+
+    document.getElementById("loginEmail").focus();
+
+    closeMenu();
+}
+function openRegister() {
+    const auth = document.getElementById("authSection");
+
+    auth.style.display = "block";
+
+    document.getElementById("loginEmail").focus();
+
+    closeMenu();
+}
+function logoutUser() {
+
+    localStorage.removeItem("token");
+    localStorage.removeItem("user_id");
+    localStorage.removeItem("email");
+
+    alert("✅ Logged out successfully!");
+
+    location.reload();
+}
+</script></body>
+</html>

@@ -1,0 +1,17 @@
+# Environment files
+backend/.env
+
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/
+
+# SQLite database
+*.db
+
+# Uploads
+uploads/
+
+# Backup files
+*.zip
